@@ -101,7 +101,7 @@
 			draw() {
 				this.groundCTX.clearRect(0, 0, this.ground.width, this.ground.height);
 				/* Draw grid */
-				this.groundCTX.strokeStyle = "green";
+				this.groundCTX.strokeStyle = "#27272a";
 				this.groundCTX.beginPath();
 				for(let i = 0; i < Math.max(myConway.width, myConway.height); i += 1) {
 					this.groundCTX.moveTo(i * this.settings.size.value, 0);

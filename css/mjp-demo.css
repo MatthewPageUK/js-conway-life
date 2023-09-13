@@ -19,7 +19,8 @@ canvas {
 	top: 0px;
 	left: 0px;
 	z-index: 1000;
-	border: 1px solid green;
+	border-top: 1px solid #27272a;
+	border-left: 1px solid #27272a;
 }
 header {
 	position: absolute;
@@ -55,7 +56,6 @@ button {
 	font-size: 1.5rem;
 	color: white;
 	text-transform: uppercase;
-	border: 1px solid green;
 	padding: 5px 5px;
 	margin: 0 2px 2px 0;
 	background-color: rgb(0,30,0);
@@ -73,11 +73,12 @@ button:disabled {
 }
 fieldset {
 	margin-top: 10px;
-	border: 1px solid green;
+	border: 1px solid #fbbf24;
 }
 legend {
 	font-size: 1.5rem;
 	text-transform: uppercase;
+	color: #fbbf24;
 }
 span.label {
 	display: inline-block;
