@@ -58,11 +58,11 @@ button {
 	text-transform: uppercase;
 	padding: 5px 5px;
 	margin: 0 2px 2px 0;
-	background-color: rgb(0,30,0);
+	background-color: #18181b;
 	font-family: 'VT323', monospace;
 }
 button:hover {
-	color: yellow !important;
+	color: #fbbf24 !important;
 	cursor: pointer;
 }
 button:hover:disabled {
@@ -93,7 +93,7 @@ span.rangeValue {
 	display: inline-block;
 	width: 25px;
 	padding: 3px;
-	border: 1px solid green;
+	border: 1px solid #fbbf24;
 	margin: 0 0 2px 0;
 	font-size: 1.5rem;
 	text-align: center;
@@ -293,13 +293,13 @@ input[type=range]:focus::-ms-fill-upper {
 /* customize scrollbar css */
 #loadList::-webkit-scrollbar{
 	width:12px;
-	background-color:#006600;
+	background-color:#fbbf24;
 }
 #loadList::-webkit-scrollbar:horizontal{
 	height:12px;
 }
 #loadList::-webkit-scrollbar-track{
-	border:1px #006600 solid;
+	border:1px #78350f solid;
 	border-radius:10px;
 	-webkit-box-shadow:0 0 6px #006600 inset;
 }
