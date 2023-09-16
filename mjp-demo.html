@@ -7,45 +7,98 @@
 		<meta name="author" content="Matthew Page">
 		<meta name="description" content="A Javascript implementation of John Horton Conway's cellular automaton algorithm Game of Life.">
 		<meta name="keywords" content="conway, javascript, biology, microstructure, automata, homogeneous, cellular, tessellation, iterative">
-		<link href="css/mjp-demo.css" rel="stylesheet">
+		<link href="css/mjp-tailwind.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
-		<!-- <script src="https://cdn.tailwindcss.com"></script> -->
-
 	</head>
-	<body>
+	<body class="bg-primary-700 text-primary-100">
 
 		<!-- Some ground for life to grow in -->
-		<canvas id="ground"></canvas>
+		<canvas id="ground" class="absolute top-0 left-0 z-100"></canvas>
 
 		<!-- Setting and controls -->
-		<div id="settings">
-			<p class="buttons">
-				<button id="buttonPlay" onclick="app.play(); this.blur()">Play</button>
-				<button id="buttonStep" onclick="app.step(); this.blur()">Step</button>
-				<button id="buttonReset" onclick="app.clear(); this.blur()">Clear</button>
-				<button id="buttonAbout" onclick="app.toggleAbout(); this.blur()">About</button>
-			</p>
-			<fieldset>
-				<legend>Colour</legend>
-				<p class="buttons">
-					<button id="buttonRed" onclick="app.setColour('red'); this.blur()">Red</button>
-					<button id="buttonGreen" onclick="app.setColour('green'); this.blur()">Green</button>
-					<button id="buttonBlue" onclick="app.setColour('blue'); this.blur()">Blue</button>
-					<button id="buttonYellow" onclick="app.setColour('yellow'); this.blur()">Yellow</button>
-					<button id="buttonMulti" onclick="app.setColour('multi'); this.blur()">Multi</button>
-					<button id="buttonDisco" onclick="app.setColour('disco'); this.blur()">Disco</button>
+		<div id="settings" class="absolute top-0 bottom-0 right-0 w-64 z-100 space-y-2">
+			<fieldset class="border border-secondary-400 rounded-lg">
+				<legend class="ml-4 px-2 text-xl uppercase text-secondary-400">Controls</legend>
+				<p class="p-2 pt-1 grid grid-cols-2 gap-1">
+					<button
+						class="text-xl"
+						id="buttonPlay"
+						onclick="app.play(); this.blur()"
+					>Play</button>
+					<button
+						class="text-xl"
+						id="buttonStep"
+						onclick="app.step(); this.blur()"
+					>Step</button>
+					<button
+						class="text-xl"
+						id="buttonReset"
+						onclick="app.clear(); this.blur()"
+					>Clear</button>
+					<button
+						class="text-xl"
+						id="buttonAbout"
+						onclick="app.toggleAbout(); this.blur()"
+					>About</button>
 				</p>
 			</fieldset>
-			<fieldset>
-				<legend>Options</legend>
-				<p><span class="label">Speed </span><input id="setSpeed" value="5" min="1" max="60" type="range">
-					<span class="rangeValue" id="displaySpeed">0</span></p>
-				<p><span class="label">Size </span><input id="setSize" min="1" max="40" step="1" value="10" type="range" onchange="app.clear()">
-					<span class="rangeValue" id="displaySize">0</span></p>
+
+			<fieldset class="border border-secondary-400 rounded-lg">
+				<legend class="ml-4 px-2 text-xl uppercase text-secondary-400">Colour</legend>
+				<p class="p-2 pt-1 grid grid-cols-3 gap-1">
+					<button
+						class="text-xl"
+						id="buttonRed"
+						onclick="app.setColour('red'); this.blur()"
+					>Red</button>
+					<button
+						class="text-xl"
+						id="buttonGreen"
+						onclick="app.setColour('green'); this.blur()"
+					>Green</button>
+					<button
+						class="text-xl"
+						id="buttonBlue"
+						onclick="app.setColour('blue'); this.blur()"
+					>Blue</button>
+					<button
+						class="text-xl"
+						id="buttonYellow"
+						onclick="app.setColour('yellow'); this.blur()"
+					>Yellow</button>
+					<button
+						class="text-xl"
+						id="buttonMulti"
+						onclick="app.setColour('multi'); this.blur()"
+					>Multi</button>
+					<button
+						class="text-xl"
+						id="buttonDisco"
+						onclick="app.setColour('disco'); this.blur()"
+					>Disco</button>
+				</p>
 			</fieldset>
-			<fieldset>
-				<legend>Load lifeform</legend>
-				<div id="loadList"></div>
+			<fieldset class="border border-secondary-400 rounded-lg">
+				<legend class="ml-4 px-2 text-xl uppercase text-secondary-400">Options</legend>
+				<div class="p-2 pt-1 text-xl">
+					<p>
+						<span class="inline-block w-16">Speed</span>
+						<input id="setSpeed" value="5" min="1" max="60" type="range" class="accent-white w-24 h-2 bg-secondary-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+						<span class="p-2 m-1" id="displaySpeed">0</span>
+					</p>
+					<p>
+						<span class="inline-block w-16">Size</span>
+						<input id="setSize" min="1" max="40" step="1" value="10" type="range" onchange="app.clear()" class="accent-white w-24 h-2 bg-secondary-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+						<span class="p-2 m-1" id="displaySize">0</span>
+					</p>
+				</div>
+			</fieldset>
+
+			<fieldset class="border border-secondary-400 rounded-lg">
+				<legend class="ml-4 px-2 text-xl uppercase text-secondary-400">Load lifeform</legend>
+				<div class="p-2 pt-1">
+					<div id="loadList" class="overflow-y-scroll h-48"></div>
+				</div>
 			</fieldset>
 		</div>
 
@@ -71,7 +124,7 @@
 				this.rows = 0;
 				this.cols = 0;
 				this.resize = false;
-				this.colour = "yellow";
+				this.colour ="yellow";
 				this.frame = 0;
 				this.animator = false;
 				this.isPaused = true;
@@ -87,10 +140,10 @@
 			play() {
 				this.isPaused = !this.isPaused;
 				if(this.isPaused) {
-					document.getElementById("buttonPlay").textContent = "Play";
+					document.getElementById("buttonPlay").textContent ="Play";
 					document.getElementById("buttonStep").disabled = false;
 				} else {
-					document.getElementById("buttonPlay").textContent = "Pause";
+					document.getElementById("buttonPlay").textContent ="Pause";
 					document.getElementById("buttonStep").disabled = true;
 				}
 			}
@@ -103,7 +156,7 @@
 			draw() {
 				this.groundCTX.clearRect(0, 0, this.ground.width, this.ground.height);
 				/* Draw grid */
-				this.groundCTX.strokeStyle = "#fbbf24";
+				this.groundCTX.strokeStyle ="#fbbf24";
 				this.groundCTX.beginPath();
 				for(let i = 0; i < Math.max(myConway.width, myConway.height); i += 1) {
 					this.groundCTX.moveTo(i * this.settings.size.value, 0);
@@ -131,7 +184,7 @@
 					}
 				}
 				/* Highlight active mouse cell */
-				app.groundCTX.fillStyle = "rgba(220,0,0,1)";
+				app.groundCTX.fillStyle ="rgba(220,0,0,1)";
 				app.groundCTX.beginPath();
 				app.groundCTX.arc(app.mouseX * app.settings.size.value, app.mouseY * app.settings.size.value,
 					app.settings.size.value / 2, 0, 2 * Math.PI);
@@ -157,17 +210,17 @@
 			}
 			getColour(x, y) {
 				switch (this.colour) {
-					case "red":
+					case"red":
 						return `rgb(248,113,113)`;
-					case "green":
+					case"green":
 						return `rgb(74,222,128)`;
-					case "blue":
+					case"blue":
 						return `rgb(96,165,250)`;
-					case "yellow":
+					case"yellow":
 						return `rgb(251,191,36)`;
-					case "multi":
+					case"multi":
 						return `hsl(${x+(this.frame%360)},100%,50%)`;
-					case "disco":
+					case"disco":
 						return `hsl(${x*(this.frame/30)},100%,50%)`;
 				}
 			}
@@ -198,47 +251,32 @@
 
 			/* Load lifeform list and actions */
 			const loadList = document.getElementById("loadList");
-			let html = "";
+			let html ="";
 			let lifeforms = [];
 			let i = 0;
 			lifeformData.forEach((l) => {
 				let lf = new ConwayLifeform().loadRLE(l);
 				lifeforms.push(lf);
-				html += `<p><a href="#" onclick="loadLife(${i}); return false;">${lf.name}</a></p>`;
+				html += `<p><a class="block w-full mr-2 text-lg hover:bg-secondary-400 hover:px-1 hover:text-primary-800" href="#" onclick="loadLife(${i}); return false;">${lf.name}</a></p>`;
 				i+=1;
 			});
 			loadList.innerHTML = html;
 
 			function loadLife(n) {
+				if (! app.isPaused) {
+					app.play();
+				}
 				myConway.reset();
 				let offsetX = Math.floor((myConway.width/2)-(lifeforms[n].width/2));
 				let offsetY = Math.floor((myConway.height/2)-(lifeforms[n].height/2));
 				myConway.addLifeform(lifeforms[n], offsetX, offsetY);
 			}
 
-			// /**
-			//  * Toggle the display panels
-			//  */
-			// function toggleDisplay() {
-			// 	isHidden = !isHidden;
-			// 	if(isHidden) {
-			// 		document.getElementById("buttonToggleDisplay").textContent = "Info";
-			// 		document.querySelectorAll("fieldset, header, footer").forEach((el)=>{
-			// 			el.style.display = "none";
-			// 		});
-			// 		document.querySelector("#settings").classList.add("mini");
-			// 	} else {
-			// 		document.getElementById("buttonToggleDisplay").textContent = "Hide";
-			// 		document.querySelectorAll("fieldset, header, footer").forEach((el)=>{
-			// 			el.style.display = "block";
-			// 		});
-			// 		document.querySelector("#settings").classList.remove("mini");
-			// 	}
-			// }
-
 			/* Start the animation loop */
 			app.clear();
 			app.animationLoop();
+
+			app.play();
 
 		</script>
 	</body>

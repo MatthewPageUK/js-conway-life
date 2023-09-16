@@ -21,3 +21,11 @@ Any dead cell with exactly three live neighbours becomes a live cell, as if by r
 RLE Support
 
 Load data direct from RLE (Run Length Encoded) sources
+
+
+### Notes
+
+Rebuild Tailwind CSS
+
+- npx tailwindcss -i ./css/mjp-demo.css -o ./css/mjp-tailwind.css --watch
+
