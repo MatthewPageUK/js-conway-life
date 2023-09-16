@@ -3,11 +3,11 @@ body {
 	padding: 0px;
 	margin: 0px;
 	font-family: 'VT323', monospace;
-	background-color: transparent;
+	background-color: #3f3f46;
 }
 a { color: lightgreen; text-decoration: none; }
 a:hover { color: yellow; }
-div, h1, h2, p, button, footer, header {
+div, h1, h2, p, footer, header {
 	box-sizing: border-box;
 	position: relative;
 	overflow: hidden;

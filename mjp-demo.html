@@ -9,6 +9,8 @@
 		<meta name="keywords" content="conway, javascript, biology, microstructure, automata, homogeneous, cellular, tessellation, iterative">
 		<link href="css/mjp-demo.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+		<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
 	</head>
 	<body>
 
@@ -69,7 +71,7 @@
 				this.rows = 0;
 				this.cols = 0;
 				this.resize = false;
-				this.colour = "green";
+				this.colour = "yellow";
 				this.frame = 0;
 				this.animator = false;
 				this.isPaused = true;
@@ -101,7 +103,7 @@
 			draw() {
 				this.groundCTX.clearRect(0, 0, this.ground.width, this.ground.height);
 				/* Draw grid */
-				this.groundCTX.strokeStyle = "#27272a";
+				this.groundCTX.strokeStyle = "#fbbf24";
 				this.groundCTX.beginPath();
 				for(let i = 0; i < Math.max(myConway.width, myConway.height); i += 1) {
 					this.groundCTX.moveTo(i * this.settings.size.value, 0);
@@ -139,7 +141,8 @@
 				this.rows = Math.ceil( this.ground.height / this.settings.size.value);
 				this.cols = Math.ceil( this.ground.width / this.settings.size.value);
 				myConway = new ConwayWorld(this.cols, this.rows);
-				loadLife(Math.floor(Math.random()*lifeforms.length));
+				// loadLife(Math.floor(Math.random()*lifeforms.length));
+				loadLife(9);
 			}
 			animationLoop() {
 				if(!this.isPaused && this.frame % app.settings.speed.value == 0) myConway.tick();
@@ -155,13 +158,13 @@
 			getColour(x, y) {
 				switch (this.colour) {
 					case "red":
-						return `rgb(250,0,0)`;
+						return `rgb(248,113,113)`;
 					case "green":
-						return `rgb(0,250,0)`;
+						return `rgb(74,222,128)`;
 					case "blue":
-						return `rgb(0,0,250)`;
+						return `rgb(96,165,250)`;
 					case "yellow":
-						return `rgb(250,250,0)`;
+						return `rgb(251,191,36)`;
 					case "multi":
 						return `hsl(${x+(this.frame%360)},100%,50%)`;
 					case "disco":
